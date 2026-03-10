@@ -1,0 +1,94 @@
+# 根目录站点配置
+baseURL: "https://example.com/" # 填入自己的域名
+title: "爱播语录"   # 站点名称，作为浏览器标签页标题（若未设置 params.browserTab.title）
+
+enableRobotsTXT: true
+enableGitInfo: false   # 无 .git 或不需要 Git 信息时设为 false
+hasCJKLanguage: true
+
+module:
+  hugoVersion:
+    min: "0.146.0"
+
+# 自定义输出格式 llms（供 home 使用）
+outputFormats:
+  llms:
+    name: llms
+    baseName: llms
+    mediaType: text/plain
+    isPlainText: true
+
+# 仅保留画廊首页
+outputs:
+  home: [html, llms]
+  page: [html]
+
+defaultContentLanguage: zh-cn
+languageCode: zh-CN
+
+markup:
+  highlight:
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
+        enable: true
+
+enableInlineShortcodes: true
+
+menu:
+  main:
+    - name: 主题切换
+      weight: 1
+      params:
+        type: theme-toggle
+  sidebar: []
+
+params:
+  description: 语录画廊
+  # 浏览器标签页：标题与图标（不设则标签标题用顶层 title，图标用 static 下默认 favicon）
+  browserTab:
+    title: ""           # 留空则使用顶层 title；可填如 "爱播语录 | 语录画廊"
+    favicon: "favicon.svg"       # 主图标，相对 static 的路径
+    faviconIco: "favicon.ico"   # 备用 .ico，部分浏览器需要
+    appleTouchIcon: "apple-touch-icon.png"  # 苹果设备添加到主屏幕的图标
+  # 画廊页：标题与随机展示数量（可在本文件修改，无需改模板）
+  gallery:
+    title: "爱播语录"   # 画廊主标题（<h1>）
+    randomCount: 20       # 首页随机展示的语录数量
+  externalLinkDecoration: true
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/logo.svg
+      dark: images/logo-dark.svg
+      width: 40
+      height: 40
+      link: /
+    width: wide
+  theme:
+    default: system
+    displayToggle: true
+  footer:
+    enable: true
+    displayCopyright: true
+    displayPoweredBy: true
+    width: normal
+  displayUpdatedDate: true
+  dateFormat: "2026-03-10" #日期格式
+  search:
+    enable: false
+  highlight:
+    copy:
+      enable: true
+      display: hover
+  page:
+    width: normal
+  comments:
+    enable: false
